@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanoja — Inteligencia Clínica · Propuesta para Dr. José Rafael Yunén</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f766e'/%3E%3Cpath d='M5 17h4l2-6 3 11 3-8 2 3h5' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fbfcfc;
+  --bg-soft:#f3f7f6;
+  --bg-dark:#0f1a19;
+  --ink:#16211f;
+  --ink-soft:#3c4a47;
+  --muted:#6d7d7a;
+  --line:#e0e8e6;
+  --line-soft:#eef3f2;
+  --teal:#0f766e;
+  --teal-deep:#0b5a54;
+  --teal-mist:#e6f1ef;
+  --gold:#a67a37;
+  --display:'Fraunces',Georgia,serif;
+  --body:'Inter',system-ui,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+  --ease:cubic-bezier(0.16,1,0.3,1);
+  --xl:140px;--lg:90px;--md:48px;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);font-family:var(--body);
+  line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  hyphens:none;-webkit-hyphens:none;word-break:normal;overflow-wrap:break-word;
+}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg-soft)}
+::-webkit-scrollbar-thumb{background:var(--teal)}
+::selection{background:var(--teal);color:#fff}
+
+.progress-bar{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--teal);transform-origin:left;transform:scaleX(0);z-index:200;animation:grow linear;animation-timeline:scroll(root)}
+@keyframes grow{to{transform:scaleX(1)}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;
+  padding:18px clamp(20px,5vw,64px);background:rgba(251,252,252,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft)}
+.brand{display:flex;align-items:center;gap:11px;font-weight:600;font-size:15px;letter-spacing:-.01em}
+.brand .mark{width:26px;height:26px;border-radius:7px;background:var(--teal);display:grid;place-items:center;flex:0 0 auto}
+.brand .mark svg{width:17px;height:17px}
+.brand small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:400;margin-top:1px}
+.nav-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+@media(max-width:640px){.nav-tag{display:none}}
+
+main{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,56px)}
+section{padding:var(--lg) 0}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--teal);font-weight:500;display:flex;align-items:center;gap:12px;margin-bottom:26px}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--teal);display:inline-block}
+h2{font-family:var(--display);font-weight:500;font-size:clamp(30px,4.6vw,52px);line-height:1.04;letter-spacing:-.015em;color:var(--ink)}
+h3{font-family:var(--display);font-weight:500;font-size:22px;letter-spacing:-.01em}
+p{color:var(--ink-soft)}
+.lead{font-size:clamp(16px,1.7vw,19px);color:var(--ink-soft);max-width:62ch}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;padding-top:120px;padding-bottom:60px}
+.hero .ghost{position:absolute;right:-2vw;top:34%;font-family:var(--display);font-size:clamp(200px,34vw,460px);line-height:.8;color:var(--teal-mist);z-index:0;pointer-events:none;user-select:none;font-weight:500;letter-spacing:-.04em}
+.hero-inner{position:relative;z-index:1}
+.hero h1{font-family:var(--display);font-weight:500;font-size:clamp(46px,8.5vw,108px);line-height:.98;letter-spacing:-.025em;color:var(--ink)}
+.hero h1 em{font-style:italic;color:var(--teal)}
+.hero .sub{margin-top:30px;font-size:clamp(17px,2vw,22px);line-height:1.5;color:var(--ink-soft);max-width:60ch;font-weight:400}
+.hero .meta{margin-top:46px;display:flex;flex-wrap:wrap;gap:14px 40px;align-items:baseline}
+.hero .meta div{display:flex;flex-direction:column;gap:4px}
+.hero .meta .k{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.hero .meta .v{font-size:17px;font-weight:600;color:var(--ink);font-family:var(--display)}
+.scroll-cue{position:absolute;bottom:34px;left:0;font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:10px}
+.scroll-cue .dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 1.8s var(--ease) infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
+
+/* PROBLEM */
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-top:50px}
+.problem-list{display:flex;flex-direction:column}
+.problem-item{padding:22px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:34px 1fr;gap:16px}
+.problem-item:last-child{border-bottom:1px solid var(--line)}
+.problem-item .n{font-family:var(--mono);font-size:11px;color:var(--teal);letter-spacing:.1em;padding-top:5px}
+.problem-item h4{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:5px}
+.problem-item p{font-size:14.5px}
+.problem-aside{position:sticky;top:110px;background:var(--bg-dark);color:#dfe9e7;border-radius:18px;padding:42px 38px}
+.problem-aside .big{font-family:var(--display);font-size:clamp(40px,5vw,60px);line-height:1;color:#fff;font-weight:500}
+.problem-aside p{color:#9fb3b0;margin-top:16px;font-size:15px}
+
+/* STEPS */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:54px}
+.step{background:#fff;border:1px solid var(--line);border-radius:16px;padding:34px 30px;transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .45s var(--ease)}
+.step:hover{transform:translateY(-6px);box-shadow:0 22px 50px rgba(15,118,110,.10);border-color:var(--teal-mist)}
+.step .num{font-family:var(--mono);font-size:12px;color:var(--teal);letter-spacing:.18em;margin-bottom:20px}
+.step .ic{width:46px;height:46px;border-radius:12px;background:var(--teal-mist);display:grid;place-items:center;margin-bottom:20px}
+.step .ic svg{width:24px;height:24px;stroke:var(--teal-deep)}
+.step h3{margin-bottom:10px;font-size:20px}
+.step p{font-size:14.5px}
+.privacy-note{margin-top:40px;display:flex;align-items:center;gap:16px;padding:20px 26px;background:var(--teal-mist);border-radius:14px;border-left:3px solid var(--teal)}
+.privacy-note svg{width:26px;height:26px;stroke:var(--teal-deep);flex:0 0 auto}
+.privacy-note p{color:var(--teal-deep);font-size:14.5px;font-weight:500}
+
+/* MODULES */
+.mod-block{margin-top:48px}
+.mod-label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:18px;display:flex;align-items:center;gap:14px}
+.mod-label .pill{font-size:10px;padding:3px 10px;border-radius:20px;background:var(--teal);color:#fff;letter-spacing:.12em}
+.mod-label .pill.opt{background:transparent;color:var(--gold);border:1px solid var(--gold)}
+.mod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.mod{background:#fff;padding:28px 30px;transition:background .35s ease}
+.mod:hover{background:var(--bg-soft)}
+.mod .top{display:flex;justify-content:space-between;align-items:baseline;gap:14px;margin-bottom:9px}
+.mod h4{font-family:var(--display);font-size:20px;font-weight:500;color:var(--ink)}
+.mod .price{font-family:var(--mono);font-size:13px;color:var(--gold);font-weight:500;white-space:nowrap}
+.mod .inc{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+.mod p{font-size:14px;color:var(--muted);line-height:1.55}
+
+/* BENEFITS */
+.benefits{display:grid;grid-template-columns:repeat(2,1fr);gap:34px 56px;margin-top:50px}
+.benefit{display:grid;grid-template-columns:40px 1fr;gap:18px}
+.benefit .b-ic{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);display:grid;place-items:center}
+.benefit .b-ic svg{width:21px;height:21px;stroke:var(--teal)}
+.benefit h4{font-size:17px;font-weight:600;color:var(--ink);margin-bottom:5px}
+.benefit p{font-size:14.5px}
+
+/* PRICING */
+.pricing{background:var(--bg-soft);border-radius:0;margin-top:0}
+.price-wrap{display:grid;grid-template-columns:1fr 1.08fr;gap:26px;margin-top:54px;align-items:stretch}
+.plan{background:#fff;border:1px solid var(--line);border-radius:20px;padding:42px 38px;display:flex;flex-direction:column}
+.plan.featured{background:var(--bg-dark);border-color:var(--bg-dark);color:#e7efed;position:relative;box-shadow:0 30px 70px rgba(11,90,84,.20)}
+.plan .tier{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.plan.featured .tier{color:var(--teal-mist)}
+.ribbon{position:absolute;top:24px;right:24px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;background:var(--gold);color:#1a1206;padding:6px 13px;border-radius:30px;font-weight:700}
+.plan h3{font-family:var(--display);font-size:30px;font-weight:500;margin:14px 0 4px;color:var(--ink)}
+.plan.featured h3{color:#fff}
+.plan .plan-desc{font-size:14px;color:var(--muted);margin-bottom:26px;min-height:40px}
+.plan.featured .plan-desc{color:#9fb3b0}
+.price-tag{display:flex;align-items:baseline;gap:8px;padding-bottom:8px}
+.price-tag .cur{font-family:var(--mono);font-size:15px;color:var(--muted);font-weight:500}
+.price-tag .amt{font-family:var(--display);font-size:clamp(44px,6vw,62px);font-weight:500;line-height:1;letter-spacing:-.02em;color:var(--ink)}
+.plan.featured .price-tag .amt{color:#fff}
+.price-tag .per{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.price-sub{font-family:var(--mono);font-size:12.5px;color:var(--teal);margin-bottom:8px}
+.plan.featured .price-sub{color:#5fd3c6}
+.save{display:inline-block;font-family:var(--mono);font-size:11px;color:var(--gold);border:1px solid color-mix(in srgb,var(--gold) 50%,transparent);padding:4px 10px;border-radius:20px;margin-bottom:24px}
+.plan ul{list-style:none;margin:8px 0 28px;display:flex;flex-direction:column;gap:12px}
+.plan li{font-size:14px;color:var(--ink-soft);display:grid;grid-template-columns:20px 1fr;gap:11px;align-items:start}
+.plan.featured li{color:#cfdedb}
+.plan li svg{width:15px;height:15px;stroke:var(--teal);margin-top:4px}
+.plan.featured li svg{stroke:#5fd3c6}
+.plan .foot{margin-top:auto;font-size:12.5px;color:var(--muted);padding-top:18px;border-top:1px solid var(--line)}
+.plan.featured .foot{color:#8aa39f;border-top-color:rgba(255,255,255,.12)}
+.featured-trade{font-size:13px;color:#9fb3b0;background:rgba(95,211,198,.08);border:1px solid rgba(95,211,198,.18);border-radius:10px;padding:13px 16px;margin-bottom:24px}
+.featured-trade strong{color:#5fd3c6}
+
+/* MAINTENANCE + TERMS */
+.two-up{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:50px}
+.panel{border:1px solid var(--line);border-radius:16px;padding:36px 34px;background:#fff}
+.panel h3{margin-bottom:8px;font-size:21px}
+.panel .ptag{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:18px}
+.panel ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.panel li{font-size:14px;color:var(--ink-soft);display:grid;grid-template-columns:18px 1fr;gap:10px;align-items:start}
+.panel li svg{width:14px;height:14px;stroke:var(--teal);margin-top:4px}
+.panel .excl{margin-top:18px;padding-top:16px;border-top:1px dashed var(--line);font-size:13px;color:var(--muted)}
+
+/* CTA */
+.cta{background:var(--bg-dark);border-radius:24px;padding:clamp(48px,7vw,84px) clamp(32px,6vw,72px);text-align:center;color:#fff;position:relative;overflow:hidden;margin:30px 0}
+.cta .ghost-line{position:absolute;inset:0;opacity:.5;pointer-events:none}
+.cta h2{color:#fff;max-width:18ch;margin:0 auto;font-size:clamp(30px,5vw,56px)}
+.cta p{color:#9fb3b0;max-width:50ch;margin:22px auto 38px;font-size:16px}
+.btn{position:relative;display:inline-flex;align-items:center;gap:12px;font-family:var(--body);font-weight:600;font-size:15px;padding:17px 34px;border-radius:40px;background:var(--teal);color:#fff;text-decoration:none;overflow:hidden;transition:transform .35s var(--ease)}
+.btn span{position:relative;z-index:1}
+.btn::before{content:"";position:absolute;inset:0;background:#fff;transform:translateX(-101%);transition:transform .4s var(--ease)}
+.btn:hover{color:var(--teal-deep)}
+.btn:hover::before{transform:translateX(0)}
+.btn:hover{transform:translateY(-2px)}
+.cta .contact{margin-top:34px;font-family:var(--mono);font-size:13px;letter-spacing:.06em;color:#7e9591}
+.cta .contact a{color:#5fd3c6;text-decoration:none}
+
+footer{padding:46px 0 60px;border-top:1px solid var(--line);margin-top:30px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+footer .f-brand{font-family:var(--display);font-size:17px;color:var(--ink);font-weight:500}
+footer small{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--muted)}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+
+/* Lightbox: imagen del dashboard a pantalla completa con zoom */
+.zoomable{cursor:zoom-in}
+.lightbox{position:fixed;inset:0;z-index:1000;background:rgba(7,16,15,.97);display:none;place-items:center;overflow:auto;padding:24px;-webkit-overflow-scrolling:touch}
+.lightbox.open{display:grid}
+.lb-img{max-width:100%;max-height:90vh;object-fit:contain;border-radius:8px;cursor:zoom-in;transition:max-width .15s ease,max-height .15s ease}
+.lb-img.zoomed{max-width:none;max-height:none;width:2600px;cursor:zoom-out}
+.lb-close{position:fixed;top:16px;right:20px;width:46px;height:46px;border:none;background:rgba(255,255,255,.12);color:#fff;font-size:26px;line-height:1;border-radius:50%;cursor:pointer;z-index:1002;display:grid;place-items:center}
+.lb-close:hover{background:rgba(255,255,255,.22)}
+.lb-hint{position:fixed;bottom:18px;left:0;right:0;text-align:center;color:#9fb3b0;font-family:var(--mono);font-size:11px;letter-spacing:.08em;pointer-events:none}
+@media(max-width:600px){.lb-img.zoomed{width:1200px}}
+
+@media(max-width:860px){
+  :root{--lg:64px}
+  .problem-grid,.steps,.mod-grid,.benefits,.price-wrap,.two-up{grid-template-columns:1fr}
+  .problem-aside{position:static}
+  .hero .ghost{display:none}
+}
+/* === Celulares === */
+@media(max-width:600px){
+  :root{--lg:54px;--md:32px}
+  body{font-size:15px}
+  nav{padding:14px 18px}
+  .brand{font-size:14px}
+  .brand .mark{width:24px;height:24px}
+  main{padding:0 18px;max-width:100%}
+  html,body{max-width:100%;overflow-x:hidden}
+  p,h1,h2,h3,li,.lead,.hero .sub{overflow-wrap:break-word;word-break:normal;max-width:100%}
+  .hero{padding-top:96px;min-height:auto;padding-bottom:48px}
+  .hero h1{font-size:clamp(30px,9vw,42px);line-height:1.04}
+  .hero .sub{font-size:16px;margin-top:22px}
+  .hero .meta{flex-direction:column;gap:16px;margin-top:34px}
+  .hero .meta .v{font-size:15px}
+  .nav-tag{display:none}
+  h2{font-size:clamp(26px,7.5vw,34px)}
+  .lead{font-size:16px}
+  .eyebrow{margin-bottom:20px;font-size:10px;letter-spacing:.18em}
+  .step{padding:26px 22px}
+  .mod{padding:22px 20px}
+  .benefit{grid-template-columns:34px 1fr;gap:14px}
+  .plan{padding:32px 24px}
+  .price-tag .amt{font-size:clamp(40px,13vw,54px)}
+  .panel{padding:28px 22px}
+  .problem-aside{padding:32px 26px}
+  .problem-aside .big{font-size:clamp(30px,8vw,40px)}
+  .cta{padding:48px 26px;border-radius:18px}
+  .btn{width:100%;justify-content:center}
+  .step .num,.mod .inc{font-size:11px}
+  footer{flex-direction:column;align-items:flex-start;gap:10px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .reveal{opacity:1;transform:none}
+}
+
+
+.media-figure{margin:0}
+.hero-shot img{width:100%;border-radius:14px;border:1px solid var(--line);box-shadow:0 26px 64px rgba(15,118,110,.14);display:block}
+.media-cap{font-size:13.5px;color:var(--muted);margin-top:14px;font-family:var(--body);max-width:70ch}
+.media-cap strong{color:var(--ink)}
+.video-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:38px}
+.vid video{width:100%;border-radius:12px;border:1px solid var(--line);background:#000;display:block}
+.vid .media-cap{margin-top:13px}
+@media(max-width:860px){.video-grid{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+<div class="progress-bar"></div>
+
+<nav>
+  <div class="brand">
+    <span class="mark"><svg viewBox="0 0 32 32"><path d="M5 17h4l2-6 3 11 3-8 2 3h5" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    <span>Sanoja<small>Inteligencia Clínica</small></span>
+  </div>
+  <span class="nav-tag">Propuesta · Dr. José R. Yunén</span>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="ghost">IC</div>
+    <div class="hero-inner">
+      <div class="eyebrow">Propuesta de implementación · Junio 2026</div>
+      <h1>El expediente<br>de tus pacientes,<br><em>al fin legible.</em></h1>
+      <p class="sub">Una plataforma local y privada que convierte los estudios de cada paciente en un tablero visual: tendencias, riesgos y resúmenes clínicos asistidos por IA. Toda la data, en una sola pantalla.</p>
+      <div class="meta">
+        <div><span class="k">Preparada para</span><span class="v">Dr. José Rafael Yunén</span></div>
+        <div><span class="k">Presentada por</span><span class="v">Luis Sanoja</span></div>
+        <div><span class="k">Vigencia</span><span class="v">Junio 2026</span></div>
+      </div>
+    </div>
+    <div class="scroll-cue"><span class="dot"></span>Desliza para conocer la propuesta</div>
+  </section>
+
+  <!-- PROBLEMA -->
+  <section>
+    <div class="eyebrow">01 — El problema</div>
+    <h2>Tienes toda la data.<br>Pero está fragmentada.</h2>
+    <div class="problem-grid">
+      <div class="problem-list reveal">
+        <div class="problem-item"><span class="n">A</span><div><h4>Decenas de PDFs por paciente</h4><p>Labs, imágenes, cardiología y reportes dispersos en carpetas. Encontrar un valor toma minutos que no tienes en consulta.</p></div></div>
+        <div class="problem-item"><span class="n">B</span><div><h4>Las tendencias se pierden</h4><p>Un LDL de 138 no dice nada solo. Verlo bajar de 170 en un año lo cambia todo — y un PDF plano no te da esa lectura.</p></div></div>
+        <div class="problem-item"><span class="n">C</span><div><h4>Digerir todo cuesta tiempo</h4><p>Revisar carpeta por carpeta antes de cada consulta es trabajo repetitivo que resta minutos al paciente.</p></div></div>
+        <div class="problem-item"><span class="n">D</span><div><h4>El paciente no ve su progreso</h4><p>Sin una visualización clara, es difícil que entienda y se comprometa con su tratamiento.</p></div></div>
+      </div>
+      <aside class="problem-aside reveal d1">
+        <div class="big">“Un número aislado no es información. La tendencia sí.”</div>
+        <p>Sanoja existe para devolverte esa lectura — el panorama completo de cada paciente, en segundos, sin que pierdas el control clínico.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- SOLUCION -->
+  <section>
+    <div class="eyebrow">02 — Cómo funciona</div>
+    <h2>De un estudio suelto<br>a un tablero, en 3 pasos.</h2>
+    <p class="lead" style="margin-top:22px">Tú subes; la IA organiza; el sistema te muestra. Sin trabajo manual de transcripción.</p>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="num">PASO 01</div>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4m0 0L8 8m4-4 4 4"/><path d="M20 16v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3"/></svg></div>
+        <h3>Subes el estudio</h3>
+        <p>Foto o PDF de laboratorios, imágenes, cardiología, composición corporal o wearables. El formato que sea.</p>
+      </div>
+      <div class="step reveal d1">
+        <div class="num">PASO 02</div>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 0-4 4 4 4 0 0 0 0 8 4 4 0 0 0 8 0 4 4 0 0 0 0-8 4 4 0 0 0-4-4Z"/><path d="M12 6v12"/></svg></div>
+        <h3>La IA extrae todo</h3>
+        <p>No un resumen — cada valor, cada hallazgo, ordenado en el tiempo. Lo que un reporte plano esconde, queda visible.</p>
+      </div>
+      <div class="step reveal d2">
+        <div class="num">PASO 03</div>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-4 3 3 4-6"/></svg></div>
+        <h3>Se arma el tablero</h3>
+        <p>Cockpit, tendencias, riesgos y proyección — generados automáticamente. Listos para la consulta.</p>
+      </div>
+    </div>
+    <div class="privacy-note reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6l-8-4Z"/><path d="m9 12 2 2 4-4"/></svg>
+      <p>Todo corre <strong>local en tu Mac o PC</strong>. La información de tus pacientes nunca sale de tu consultorio — privacidad máxima por diseño.</p>
+    </div>
+  </section>
+
+
+  <!-- LA DATA EN ACCION -->
+  <section>
+    <div class="eyebrow">En acción — Así se presenta la data</div>
+    <h2>Lo que verías con<br>cada paciente.</h2>
+    <p class="lead" style="margin-top:22px">Un mismo expediente, varias lecturas. Lo que sigue es data clínica real, organizada automáticamente por el sistema en paneles navegables.</p>
+    <figure class="hero-shot media-figure reveal" style="margin-top:46px">
+      <img id="heroImg" class="zoomable" onclick="openLightbox()" src="media/hero_panels.jpg" alt="Vista general de los paneles">
+      <figcaption class="media-cap"><strong>Vista general.</strong> Cockpit, Laboratorios, Cardiología, Composición Corporal y Apple Watch — todo de un mismo paciente, en una sola mirada.</figcaption>
+    </figure>
+    <div class="eyebrow" style="margin-top:72px">Recorrido en video</div>
+    <h3 style="font-size:26px;margin-bottom:6px">La plataforma en movimiento</h3>
+    <p class="media-cap" style="margin-top:4px">Toca cualquier video para verlo. Así se navega y se lee la data en consulta.</p>
+    <div class="video-grid">
+      <figure class="vid media-figure reveal"><video controls preload="none" playsinline poster="media/poster1.jpg"><source src="media/video1.mp4" type="video/mp4"></video><figcaption class="media-cap"><strong>Cockpit</strong> — Resumen ejecutivo clínico con IA, indicadores clave y diagnósticos activos.</figcaption></figure><figure class="vid media-figure reveal d1"><video controls preload="none" playsinline poster="media/poster2.jpg"><source src="media/video2.mp4" type="video/mp4"></video><figcaption class="media-cap"><strong>Laboratorios</strong> — Evolución temporal de cada métrica: lípidos, control metabólico y más.</figcaption></figure><figure class="vid media-figure reveal"><video controls preload="none" playsinline poster="media/poster3.jpg"><source src="media/video3.mp4" type="video/mp4"></video><figcaption class="media-cap"><strong>Cardiología</strong> — Capacidad cardiovascular, VO₂, FEVI y presión arterial domiciliaria.</figcaption></figure><figure class="vid media-figure reveal d1"><video controls preload="none" playsinline poster="media/poster4.jpg"><source src="media/video4.mp4" type="video/mp4"></video><figcaption class="media-cap"><strong>Composición Corporal</strong> — Figura corporal dinámica, composición por segmento y medidas de cinta.</figcaption></figure><figure class="vid media-figure reveal"><video controls preload="none" playsinline poster="media/poster5.jpg"><source src="media/video5.mp4" type="video/mp4"></video><figcaption class="media-cap"><strong>Whoop</strong> — Recuperación, HRV, sueño y esfuerzo (strain) — los últimos 30 días.</figcaption></figure><figure class="vid media-figure reveal d1"><video controls preload="none" playsinline poster="media/poster6.jpg"><source src="media/video6.mp4" type="video/mp4"></video><figcaption class="media-cap"><strong>Apple Watch</strong> — Actividad, pasos, ejercicio y calorías — la vida del paciente entre consultas.</figcaption></figure>
+    </div>
+  </section>
+  <!-- MODULOS -->
+  <section>
+    <div class="eyebrow">03 — Módulos</div>
+    <h2>Todo en una sola<br>plataforma clínica.</h2>
+
+    <div class="mod-block">
+      <div class="mod-label"><span class="pill">Incluido</span> Plataforma clínica</div>
+      <div class="mod-grid">
+        <div class="mod reveal"><div class="top"><h4>Cockpit</h4><span class="inc">Incluido</span></div><p>Resumen ejecutivo clínico del paciente con IA: estado general, lo que está bien, lo que vigilar, próximos pasos.</p></div>
+        <div class="mod reveal d1"><div class="top"><h4>Cardiología</h4><span class="inc">Incluido</span></div><p>Presión arterial, riesgo cardiovascular ASCVD, ecocardiograma y prueba de esfuerzo — con tendencias y semáforos.</p></div>
+        <div class="mod reveal"><div class="top"><h4>Laboratorios</h4><span class="inc">Incluido</span></div><p>Cada métrica graficada en el tiempo, con rangos óptimos y alertas de color. La evolución de un vistazo.</p></div>
+        <div class="mod reveal d1"><div class="top"><h4>Timeline</h4><span class="inc">Incluido</span></div><p>Cronología completa del expediente: cada estudio, evento y cambio, ordenado y buscable para siempre.</p></div>
+        <div class="mod reveal"><div class="top"><h4>Composición Corporal</h4><span class="inc">Incluido</span></div><p>Figura corporal dinámica, integración InBody/Renpho y tendencias de peso, grasa y músculo a lo largo del tiempo.</p></div>
+        <div class="mod reveal d1"><div class="top"><h4>Longevidad</h4><span class="inc">Incluido</span></div><p>Proyección de vida por décadas, escenarios contrastados, causas probables y VO₂ — para una conversación preventiva potente.</p></div>
+        <div class="mod reveal" style="grid-column:1/-1"><div class="top"><h4>Asistente de Consultas</h4><span class="inc">Incluido</span></div><p>Un chat clínico con acceso al expediente completo del paciente. Pregúntale en lenguaje natural —“¿qué riesgos vigilar?”, “¿cómo va el control lipídico?”— y responde con los datos reales de ese paciente, no genéricos.</p></div>
+      </div>
+    </div>
+
+    <div class="mod-block">
+      <div class="mod-label"><span class="pill opt">Opcional</span> Integraciones de wearables · USD $1,500 c/u</div>
+      <div class="mod-grid">
+        <div class="mod reveal"><div class="top"><h4>Integración Whoop</h4><span class="price">+ $1,500</span></div><p>Recuperación, sueño, esfuerzo (strain) y variabilidad cardíaca (HRV), sincronizados al expediente del paciente.</p></div>
+        <div class="mod reveal d1"><div class="top"><h4>Integración Apple Watch</h4><span class="price">+ $1,500</span></div><p>Actividad, VO₂ máx, frecuencia cardíaca y entrenamientos — la vida del paciente entre consultas.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFICIOS -->
+  <section>
+    <div class="eyebrow">04 — Por qué te sirve</div>
+    <h2>Te aumenta.<br>No te reemplaza.</h2>
+    <div class="benefits">
+      <div class="benefit reveal"><div class="b-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><h4>Ahorra tiempo</h4><p>Digiere en segundos lo que tomaría revisar carpeta por carpeta. Más minutos para el paciente, menos para el papeleo.</p></div></div>
+      <div class="benefit reveal d1"><div class="b-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-6 4 4 8-9"/><path d="M21 7v5h-5"/></svg></div><div><h4>Ves tendencias ocultas</h4><p>La evolución de cada valor en el tiempo — lo que un PDF plano nunca te muestra de un vistazo.</p></div></div>
+      <div class="benefit reveal"><div class="b-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10Z"/></svg></div><div><h4>Engancha al paciente</h4><p>El muñeco corporal, la proyección de vida y los semáforos hacen que entienda — y se motive con su tratamiento.</p></div></div>
+      <div class="benefit reveal d1"><div class="b-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 13h6M9 17h3"/></svg></div><div><h4>Memoria perfecta</h4><p>Cada estudio queda, ordenado y buscable, para siempre. Enfoque de medicina preventiva y de longevidad.</p></div></div>
+    </div>
+  </section>
+
+  <!-- INVERSION -->
+  <section>
+    <div class="eyebrow">05 — Inversión</div>
+    <h2>Una inversión,<br>todo incluido.</h2>
+    <p class="lead" style="margin-top:22px">Un solo plan con la plataforma clínica completa. Las integraciones de wearables (Whoop y Apple Watch) se agregan opcionalmente a $1,500 cada una.</p>
+    <div class="price-wrap" style="grid-template-columns:1fr;max-width:620px;margin-left:auto;margin-right:auto">
+      <div class="plan featured reveal">
+        <span class="ribbon">Cliente fundador</span>
+        <span class="tier">Plan único</span>
+        <h3>Suite Completa</h3>
+        <p class="plan-desc">La plataforma clínica completa más las integraciones de wearables, lista en tu consultorio.</p>
+        <div class="price-tag"><span class="cur">USD</span><span class="amt">$29,000</span><span class="per">/ único</span></div>
+        <div class="price-sub">+ USD $1,500 / mes de mantenimiento y capacitación</div>
+        <div class="featured-trade">Como <strong>cliente fundador</strong>: a cambio de un <strong>testimonio</strong> y poder usar tu caso como <strong>referencia</strong> para futuros médicos.</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg>Cockpit, Cardiología, Laboratorios y Timeline</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg>Composición Corporal y Longevidad</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg>Asistente de Consultas con IA</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span><strong>Hasta 50 pacientes incluidos</strong> (+$2,000 por cada 100 pacientes adicionales)</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg>Integraciones Whoop y Apple Watch opcionales (+$1,500 c/u)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg>Instalación, capacitación y migración inicial incluidas</li>
+        </ul>
+        <div class="foot">La plataforma clínica completa que viste en la demostración, en tu consultorio.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANTENIMIENTO + TERMINOS -->
+  <section>
+    <div class="eyebrow">06 — Mantenimiento y términos</div>
+    <div class="two-up">
+      <div class="panel reveal">
+        <div class="ptag">Qué cubre el mantenimiento · $1,500/mes</div>
+        <h3>Soporte continuo, sin sorpresas</h3>
+        <ul style="margin-top:18px">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg>Actualizaciones continuas del software</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg>Soporte remoto y capacitación continua</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg>Procesamiento de IA (extracción de estudios)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg>Respaldos automáticos</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg>Corrección de errores</li>
+        </ul>
+        <div class="excl">No incluye el desarrollo de módulos nuevos a la medida, que se cotizan por separado.</div>
+      </div>
+      <div class="panel reveal d1">
+        <div class="ptag">Términos y condiciones</div>
+        <h3>Claros desde el inicio</h3>
+        <ul style="margin-top:18px">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg>Forma de pago: 60% al inicio / 40% a la entrega (entrega = software operativo con más de 20 pacientes cargados y funcionando)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg>La data y los expedientes son propiedad del médico</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg>Privacidad local: la información nunca sale del consultorio</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg>Herramienta de apoyo a la decisión clínica</li>
+        </ul>
+        <div class="excl">No es un dispositivo médico certificado y no reemplaza el criterio del médico, que siempre tiene la última palabra.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section>
+    <div class="cta reveal">
+      <h2>Una herramienta para pocos.</h2>
+      <p>Sanoja — Inteligencia Clínica no es un producto masivo. Se instala de forma personal en un número limitado de consultorios, con configuración a la medida y acompañamiento directo.</p>
+      <a class="btn" href="mailto:luis@sanoja.do?subject=Sanoja%20—%20Inteligencia%20Cl%C3%ADnica"><span>Coordinar la instalación</span></a>
+    </div>
+  </section>
+
+  <footer>
+    <span class="f-brand">Sanoja — Inteligencia Clínica</span>
+    <small>Propuesta preparada para el Dr. José Rafael Yunén · Junio 2026 · Montos en USD</small>
+  </footer>
+
+</main>
+
+<script>
+// Reveal con IntersectionObserver (fallback universal, funciona en Safari)
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+<!-- Lightbox del dashboard -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+  <button class="lb-close" aria-label="Cerrar" onclick="closeLightbox(event)">&times;</button>
+  <img id="lbImg" class="lb-img" alt="Vista ampliada de los paneles" onclick="toggleZoom(event)">
+  <div class="lb-hint">Toca la imagen para acercar · toca fuera o Esc para cerrar</div>
+</div>
+<script>
+function openLightbox(){
+  var hero = document.getElementById('heroImg');
+  var lb = document.getElementById('lightbox');
+  var img = document.getElementById('lbImg');
+  if(!hero || !lb || !img) return;
+  if(!img.getAttribute('src')) img.src = hero.src;
+  img.classList.remove('zoomed');
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox(e){
+  if(e && e.target && e.target.id === 'lbImg') return;
+  var lb = document.getElementById('lightbox');
+  lb.classList.remove('open');
+  document.body.style.overflow = '';
+}
+function toggleZoom(e){
+  e.stopPropagation();
+  var img = document.getElementById('lbImg');
+  img.classList.toggle('zoomed');
+  if(img.classList.contains('zoomed')) document.getElementById('lightbox').scrollTop = 0;
+}
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+});
+</script>
+</body>
+</html>

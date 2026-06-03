@@ -244,7 +244,9 @@ footer small{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:v
 
 
 .media-figure{margin:0}
-.hero-shot img{width:100%;border-radius:14px;border:1px solid var(--line);box-shadow:0 26px 64px rgba(15,118,110,.14);display:block}
+.feature-shot img{width:100%;border-radius:16px;border:1px solid var(--line);box-shadow:0 34px 80px rgba(11,90,84,.20);display:block;cursor:zoom-in}
+.hero-shot img{width:100%;border-radius:14px;border:1px solid var(--line);box-shadow:0 18px 44px rgba(15,118,110,.10);display:block}
+.strip-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:54px 0 14px}
 .media-cap{font-size:13.5px;color:var(--muted);margin-top:14px;font-family:var(--body);max-width:70ch}
 .media-cap strong{color:var(--ink)}
 .video-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:38px}
@@ -338,9 +340,14 @@ footer small{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:v
     <div class="eyebrow">En acción — Así se presenta la data</div>
     <h2>Lo que verías con<br>cada paciente.</h2>
     <p class="lead" style="margin-top:22px">Un mismo expediente, varias lecturas. Lo que sigue es data clínica real, organizada automáticamente por el sistema en paneles navegables.</p>
-    <figure class="hero-shot media-figure reveal" style="margin-top:46px">
-      <img id="heroImg" class="zoomable" onclick="openLightbox()" src="media/hero_panels.jpg" alt="Vista general de los paneles">
-      <figcaption class="media-cap"><strong>Vista general.</strong> Cockpit, Laboratorios, Cardiología, Composición Corporal y Apple Watch — todo de un mismo paciente, en una sola mirada.</figcaption>
+    <figure class="feature-shot media-figure reveal" style="margin-top:42px">
+      <img id="featImg" class="zoomable" onclick="openLightbox(this)" src="media/cuerpo_feature.jpg" alt="Panel de composición corporal con figura dinámica y análisis biométrico">
+      <figcaption class="media-cap"><strong>Composición corporal.</strong> Figura dinámica que cambia de color según el estado, análisis biométrico por segmento y seguimiento en el tiempo — uno de los nueve paneles.</figcaption>
+    </figure>
+    <div class="strip-label">— Vista general · los cinco paneles de un mismo paciente</div>
+    <figure class="hero-shot media-figure reveal">
+      <img id="heroImg" class="zoomable" onclick="openLightbox(this)" src="media/hero_panels.jpg" alt="Vista general de los paneles">
+      <figcaption class="media-cap">Cockpit, Laboratorios, Cardiología, Composición Corporal y Apple Watch — en una sola mirada. <strong>Toca para ampliar.</strong></figcaption>
     </figure>
     <div class="eyebrow" style="margin-top:72px">Recorrido en video</div>
     <h3 style="font-size:26px;margin-bottom:6px">La plataforma en movimiento</h3>
@@ -478,12 +485,13 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   <div class="lb-hint">Toca la imagen para acercar · toca fuera o Esc para cerrar</div>
 </div>
 <script>
-function openLightbox(){
-  var hero = document.getElementById('heroImg');
+function openLightbox(el){
   var lb = document.getElementById('lightbox');
   var img = document.getElementById('lbImg');
-  if(!hero || !lb || !img) return;
-  if(!img.getAttribute('src')) img.src = hero.src;
+  if(!lb || !img) return;
+  var src = (el && el.src) ? el.src : (document.getElementById('heroImg') || {}).src;
+  if(!src) return;
+  img.src = src;
   img.classList.remove('zoomed');
   lb.classList.add('open');
   document.body.style.overflow = 'hidden';
